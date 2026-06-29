@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>carvalv — Know when. Know what. Stay ahead.</title>
+  <meta name="description" content="The car maintenance reminder app built for Egyptian roads." />
+  <meta property="og:title" content="carvalv — One step ahead." />
+  <meta property="og:description" content="Know when. Know what. Stay ahead. Join the waitlist." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600&family=Space+Grotesk:wght@400;500&family=Space+Mono&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #FF7A1A;
+      --black: #111110;
+      --black-2: #0D0D0C;
+      --card: #1C1C1A;
+      --gray: #2E2E2C;
+      --white: #F4F2EE;
+      --muted: #666;
+      --dim: #444;
+      --red: #FF2D2D;
+      --teal: #2EC4B6;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    html[lang="ar"] body {
+      font-family: 'Cairo', system-ui, sans-serif;
+    }
+
+    /* LANGUAGE MODAL */
+    .lang-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .lang-modal {
+      background: var(--card);
+      border: 1px solid var(--gray);
+      border-radius: 16px;
+      padding: 40px 36px;
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .lang-modal-logo {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 24px;
+      color: var(--orange);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .lang-modal-logo svg { width: 28px; height: 28px; }
+
+    .lang-modal-prompt {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    .lang-modal-prompt strong {
+      display: block;
+      font-size: 17px;
+      color: var(--white);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .lang-btns {
+      display: flex;
+      gap: 12px;
+    }
+
+    .lang-btn {
+      flex: 1;
+      padding: 14px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--gray);
+      background: var(--black);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .lang-btn:hover { border-color: var(--orange); background: rgba(255,122,26,0.06); }
+
+    .lang-btn-label {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 15px;
+      color: var(--white);
+    }
+
+    .lang-btn-sub {
+      font-family: 'Cairo', sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      border-bottom: 1px solid var(--gray);
+      position: sticky;
+      top: 0;
+      background: var(--black);
+      z-index: 10;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 22px;
+      color: var(--orange);
+      text-decoration: none;
+    }
+
+    .logo svg { width: 30px; height: 30px; flex-shrink: 0; }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    html[lang="ar"] .nav-tag {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 11px;
+    }
+
+    .lang-toggle {
+      display: flex;
+      background: var(--card);
+      border: 1px solid var(--gray);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .lang-toggle button {
+      padding: 6px 12px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 12px;
+      cursor: pointer;
+      font-family: 'Space Mono', monospace;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .lang-toggle button.active {
+      background: var(--orange);
+      color: var(--black);
+      font-weight: 600;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 96px 40px 80px;
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange);
+      border: 1px solid rgba(255,122,26,0.3);
+      background: rgba(255,122,26,0.07);
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+
+    html[lang="ar"] .badge {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 12px;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    h1 {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: clamp(48px, 8vw, 72px);
+      line-height: 1.05;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--white);
+    }
+
+    html[lang="ar"] h1 {
+      font-family: 'Cairo', sans-serif;
+      font-size: clamp(42px, 7vw, 64px);
+      line-height: 1.2;
+    }
+
+    h1 span { color: var(--orange); }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 40px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* FORM */
+    .form-wrap { max-width: 460px; margin: 0 auto 14px; }
+
+    .form-row { display: flex; gap: 10px; }
+
+    input[type="email"] {
+      flex: 1;
+      background: var(--card);
+      border: 1px solid var(--gray);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 15px;
+      color: var(--white);
+      font-family: 'Space Grotesk', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+      direction: ltr;
+    }
+
+    input[type="email"]:focus { border-color: var(--orange); }
+    input[type="email"]::placeholder { color: var(--dim); }
+
+    .btn-join {
+      background: var(--orange);
+      color: var(--black);
+      border: none;
+      border-radius: 10px;
+      padding: 14px 24px;
+      font-family: 'Chakra Petch', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+
+    html[lang="ar"] .btn-join {
+      font-family: 'Cairo', sans-serif;
+      font-size: 15px;
+    }
+
+    .btn-join:hover { opacity: 0.88; }
+    .btn-join:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .form-hint {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--dim);
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+
+    html[lang="ar"] .form-hint {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 12px;
+    }
+
+    .form-msg {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 14px;
+      min-height: 20px;
+    }
+
+    .form-msg.success { color: var(--teal); }
+    .form-msg.error { color: var(--red); }
+
+    /* STATS */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--gray);
+      border-bottom: 1px solid var(--gray);
+    }
+
+    .stat {
+      padding: 32px 24px;
+      text-align: center;
+      border-right: 1px solid var(--gray);
+    }
+
+    html[dir="rtl"] .stat { border-right: none; border-left: 1px solid var(--gray); }
+    html[dir="rtl"] .stat:last-child { border-left: none; }
+    .stat:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--orange);
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    html[lang="ar"] .stat-label {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 12px;
+      text-transform: none;
+    }
+
+    /* FEATURES */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--gray);
+    }
+
+    .feat {
+      padding: 40px 32px;
+      border-right: 1px solid var(--gray);
+    }
+
+    html[dir="rtl"] .feat { border-right: none; border-left: 1px solid var(--gray); }
+    html[dir="rtl"] .feat:last-child { border-left: none; }
+    .feat:last-child { border-right: none; }
+
+    .feat-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      color: var(--orange);
+    }
+
+    .feat-icon svg { width: 20px; height: 20px; }
+
+    .feat-title {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    html[lang="ar"] .feat-title {
+      font-family: 'Cairo', sans-serif;
+      font-size: 16px;
+    }
+
+    .feat-body {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* PREVIEW */
+    .preview {
+      background: var(--black-2);
+      border-bottom: 1px solid var(--gray);
+      padding: 48px 40px;
+      text-align: center;
+    }
+
+    .preview-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--dim);
+      margin-bottom: 28px;
+    }
+
+    html[lang="ar"] .preview-label {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 12px;
+      text-transform: none;
+    }
+
+    .cards-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .app-card {
+      background: var(--card);
+      border: 1px solid var(--gray);
+      border-radius: 12px;
+      padding: 18px 20px;
+      width: 180px;
+      text-align: left;
+    }
+
+    html[dir="rtl"] .app-card { text-align: right; }
+
+    .app-card.overdue { border-color: rgba(255,45,45,0.35); }
+    .app-card.due-soon { border-color: rgba(255,122,26,0.35); }
+    .app-card.good { border-color: rgba(46,196,182,0.25); }
+
+    .card-state {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+    }
+
+    html[lang="ar"] .card-state {
+      font-family: 'Cairo', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+    .card-name {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 15px;
+      color: var(--white);
+      margin-bottom: 3px;
+    }
+
+    html[lang="ar"] .card-name {
+      font-family: 'Cairo', sans-serif;
+      font-size: 14px;
+    }
+
+    .card-km {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    html[lang="ar"] .card-km {
+      font-family: 'Cairo', sans-serif;
+      font-size: 12px;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 28px 40px;
+      border-top: 1px solid var(--gray);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 16px;
+      color: var(--orange);
+    }
+
+    .footer-socials {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .social-link {
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s;
+    }
+
+    .social-link:hover { color: var(--orange); }
+    .social-link svg { width: 20px; height: 20px; }
+
+    .footer-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--dim);
+    }
+
+    html[lang="ar"] .footer-copy {
+      font-family: 'Cairo', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      nav { padding: 16px 20px; }
+      .nav-tag { display: none; }
+      .hero { padding: 64px 20px 56px; }
+      .form-row { flex-direction: column; }
+      .btn-join { width: 100%; }
+      .stats { grid-template-columns: 1fr; }
+      .stat { border-right: none; border-left: none; border-bottom: 1px solid var(--gray); }
+      .stat:last-child { border-bottom: none; }
+      .features { grid-template-columns: 1fr; }
+      .feat { border-right: none; border-left: none; border-bottom: 1px solid var(--gray); }
+      .feat:last-child { border-bottom: none; }
+      .preview { padding: 40px 20px; }
+      footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LANGUAGE SELECTION MODAL -->
+  <div class="lang-overlay" id="lang-overlay" role="dialog" aria-modal="true" aria-label="Choose language">
+    <div class="lang-modal">
+      <div class="lang-modal-logo">
+        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M27 16C27 22.0751 22.0751 27 16 27C9.92487 27 5 22.0751 5 16C5 9.92487 9.92487 5 16 5" stroke="#FF7A1A" stroke-width="2.8" stroke-linecap="round"/>
+          <path d="M9.5 16 L12.25 12.5 L15 16 L17.75 12.5 L20.5 16" stroke="#FF7A1A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        carvalv
+      </div>
+      <p class="lang-modal-prompt">
+        <strong>Choose your language · اختار لغتك</strong>
+        English or Arabic? / عربي ولا إنجليزي؟
+      </p>
+      <div class="lang-btns">
+        <button class="lang-btn" onclick="setLang('en')" aria-label="English">
+          <span class="lang-btn-label">English</span>
+          <span class="lang-btn-sub">إنجليزي</span>
+        </button>
+        <button class="lang-btn" onclick="setLang('ar')" aria-label="العربية">
+          <span style="font-family:'Cairo',sans-serif;font-size:16px;color:var(--white);font-weight:600;">العربية</span>
+          <span class="lang-btn-sub" style="font-family:'Space Mono',monospace;font-size:11px;">Arabic</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <nav>
+    <a href="/" class="logo" aria-label="carvalv home">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M27 16C27 22.0751 22.0751 27 16 27C9.92487 27 5 22.0751 5 16C5 9.92487 9.92487 5 16 5" stroke="#FF7A1A" stroke-width="2.8" stroke-linecap="round"/>
+        <path d="M9.5 16 L12.25 12.5 L15 16 L17.75 12.5 L20.5 16" stroke="#FF7A1A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      carvalv
+    </a>
+    <div class="nav-right">
+      <span class="nav-tag" id="nav-tag">Coming Soon · Egypt</span>
+      <div class="lang-toggle" role="group" aria-label="Language toggle">
+        <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+        <button id="btn-ar" onclick="setLang('ar')">ع</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="badge">
+        <span class="badge-dot" aria-hidden="true"></span>
+        <span id="badge-text">Early access · Join the waitlist</span>
+      </div>
+      <h1 id="hero-h1">One step<br><span id="hero-accent">ahead.</span></h1>
+      <p class="hero-sub" id="hero-sub">
+        The car maintenance reminder app built for Egyptian roads.
+        Know when. Know what. Never get caught off-guard.
+      </p>
+
+      <div class="form-wrap">
+        <form class="form-row" id="waitlist-form" novalidate>
+          <input type="email" id="email" placeholder="your@email.com" autocomplete="email" required aria-label="Email address" />
+          <button type="submit" class="btn-join" id="submit-btn">Join waitlist</button>
+        </form>
+        <p class="form-msg" id="form-msg" role="alert" aria-live="polite"></p>
+      </div>
+      <p class="form-hint" id="form-hint">Free 1-month trial · 39 EGP/month after · No spam, ever</p>
+    </section>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num">11M+</div>
+        <div class="stat-label" id="stat-1">Licensed vehicles in Egypt</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">39 EGP</div>
+        <div class="stat-label" id="stat-2">Per month · free to start</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">#1</div>
+        <div class="stat-label" id="stat-3">Arabic-first maintenance app</div>
+      </div>
+    </div>
+
+    <div class="features">
+      <div class="feat">
+        <div class="feat-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <div class="feat-title" id="feat-1-title">Know when</div>
+        <p class="feat-body" id="feat-1-body">Smart alerts fire the exact moment a service is due — by mileage and by time. No guesswork.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+          </svg>
+        </div>
+        <div class="feat-title" id="feat-2-title">Know what</div>
+        <p class="feat-body" id="feat-2-body">Straight from the manufacturer's schedule — the right part, the right interval, every time.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div class="feat-title" id="feat-3-title">Stay ahead</div>
+        <p class="feat-body" id="feat-3-body">Catch every service before it becomes a breakdown — and protect your car's resale value.</p>
+      </div>
+    </div>
+
+    <div class="preview">
+      <p class="preview-label" id="preview-label">App preview</p>
+      <div class="cards-row">
+        <div class="app-card overdue">
+          <div class="card-state" style="color:#FF2D2D">
+            <span class="dot" style="background:#FF2D2D" aria-hidden="true"></span>
+            <span id="card-1-state">Overdue</span>
+          </div>
+          <div class="card-name" id="card-1-name">Timing belt</div>
+          <div class="card-km" id="card-1-km">1,200 km ago · Act now</div>
+        </div>
+        <div class="app-card due-soon">
+          <div class="card-state" style="color:#FF7A1A">
+            <span class="dot" style="background:#FF7A1A" aria-hidden="true"></span>
+            <span id="card-2-state">Due soon</span>
+          </div>
+          <div class="card-name" id="card-2-name">Air filter</div>
+          <div class="card-km" id="card-2-km">Due in 400 km</div>
+        </div>
+        <div class="app-card good">
+          <div class="card-state" style="color:#2EC4B6">
+            <span class="dot" style="background:#2EC4B6" aria-hidden="true"></span>
+            <span id="card-3-state">Good</span>
+          </div>
+          <div class="card-name" id="card-3-name">Oil change</div>
+          <div class="card-km" id="card-3-km">2,400 km left</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <span class="footer-logo">carvalv</span>
+    <div class="footer-socials">
+      <a href="https://www.instagram.com/carvalv.app?igsh=MTZ4em1lMW5xM2lyZw==" class="social-link" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+        </svg>
+      </a>
+      <a href="https://www.facebook.com/share/1DmiPVyddZ/?mibextid=wwXIfr" class="social-link" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+        </svg>
+      </a>
+      <a href="https://www.tiktok.com/@carvalv.app?is_from_webapp=1&sender_device=pc" class="social-link" target="_blank" rel="noopener" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+        </svg>
+      </a>
+    </div>
+    <span class="footer-copy" id="footer-copy">© 2026 · Built for Egyptian roads · carvalv.com</span>
+  </footer>
+
+  <script>
+    const SUPABASE_URL = 'https://fxziatkzwpzoyhuoumxk.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ4emlhdGt6d3B6b3lodW91bXhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MjQ0MDEsImV4cCI6MjA5NzIwMDQwMX0.lH-tNUJ1RbXEmFiUUhBuT9eVPDh0ZADTPbtUqn_awdE';
+
+    const copy = {
+      en: {
+        navTag: 'Coming Soon · Egypt',
+        badge: 'Early access · Join the waitlist',
+        h1: 'One step<br><span id="hero-accent">ahead.</span>',
+        sub: 'The car maintenance reminder app built for Egyptian roads. Know when. Know what. Never get caught off-guard.',
+        submitBtn: 'Join waitlist',
+        hint: 'Free 1-month trial · 39 EGP/month after · No spam, ever',
+        stat1: 'Licensed vehicles in Egypt',
+        stat2: 'Per month · free to start',
+        stat3: 'Arabic-first maintenance app',
+        feat1Title: 'Know when',
+        feat1Body: 'Smart alerts fire the exact moment a service is due — by mileage and by time. No guesswork.',
+        feat2Title: 'Know what',
+        feat2Body: "Straight from the manufacturer's schedule — the right part, the right interval, every time.",
+        feat3Title: 'Stay ahead',
+        feat3Body: "Catch every service before it becomes a breakdown — and protect your car's resale value.",
+        previewLabel: 'App preview',
+        card1State: 'Overdue', card1Name: 'Timing belt', card1Km: '1,200 km ago · Act now',
+        card2State: 'Due soon', card2Name: 'Air filter', card2Km: 'Due in 400 km',
+        card3State: 'Good', card3Name: 'Oil change', card3Km: '2,400 km left',
+        footerCopy: '© 2026 · Built for Egyptian roads · carvalv.com',
+        successMsg: "You're on the list. We'll be in touch.",
+        errorDupe: "That email's already on the list.",
+        errorGeneric: 'Something went wrong. Try again.',
+        errorEmail: 'Enter a valid email address.',
+        joining: 'Joining...',
+        done: 'Done ✓',
+      },
+      ar: {
+        navTag: 'قريبًا · مصر',
+        badge: 'وصول مبكر · انضم للقائمة',
+        h1: 'خطوة<br><span id="hero-accent">للأمام دايمًا.</span>',
+        sub: 'تطبيق تذكير صيانة السيارات المصمم للطرق المصرية. اعرف امتى. اعرف إيه. متتفاجئش أبدًا.',
+        submitBtn: 'انضم للقائمة',
+        hint: 'تجربة مجانية شهر · ٣٩ جنيه شهريًا بعد كده · مش هنبعتلك سبام',
+        stat1: 'سيارة مرخصة في مصر',
+        stat2: 'شهريًا · ابدأ مجانًا',
+        stat3: 'أول تطبيق صيانة بالعربي',
+        feat1Title: 'اعرف امتى',
+        feat1Body: 'إشعارات ذكية بالظبط لما يحين موعد الصيانة — بالكيلومتر وبالتاريخ. من غير أي تخمين.',
+        feat2Title: 'اعرف إيه',
+        feat2Body: 'مباشرة من جدول الصيانة بتاع الشركة المصنعة — القطعة الصح، الميعاد الصح، كل مرة.',
+        feat3Title: 'كون دايمًا قدام',
+        feat3Body: 'الق كل صيانة قبل ما تبقى عطل — وحافظ على قيمة عربيتك.',
+        previewLabel: 'معاينة التطبيق',
+        card1State: 'متأخر', card1Name: 'سير التوقيت', card1Km: 'متأخر ١٢٠٠ كم · اعملها دلوقتي',
+        card2State: 'قريبًا', card2Name: 'فلتر الهواء', card2Km: 'بعد ٤٠٠ كم',
+        card3State: 'تمام', card3Name: 'تغيير الزيت', card3Km: 'باقي ٢٤٠٠ كم',
+        footerCopy: '© ٢٠٢٦ · مصنوع للطرق المصرية · carvalv.com',
+        successMsg: 'انضممت للقائمة. هنتواصل معاك قريبًا.',
+        errorDupe: 'الإيميل ده موجود بالفعل في القائمة.',
+        errorGeneric: 'في مشكلة. حاول تاني.',
+        errorEmail: 'اكتب إيميل صحيح.',
+        joining: 'بيتسجل...',
+        done: 'تم ✓',
+      }
+    };
+
+    let currentLang = localStorage.getItem('carvalv_lang') || null;
+
+    function applyLang(lang) {
+      const t = copy[lang];
+      const isAr = lang === 'ar';
+
+      document.documentElement.lang = lang;
+      document.documentElement.dir = isAr ? 'rtl' : 'ltr';
+
+      document.getElementById('nav-tag').textContent = t.navTag;
+      document.getElementById('badge-text').textContent = t.badge;
+      document.getElementById('hero-h1').innerHTML = t.h1;
+      document.getElementById('hero-sub').textContent = t.sub;
+      document.getElementById('submit-btn').textContent = t.submitBtn;
+      document.getElementById('form-hint').textContent = t.hint;
+      document.getElementById('stat-1').textContent = t.stat1;
+      document.getElementById('stat-2').textContent = t.stat2;
+      document.getElementById('stat-3').textContent = t.stat3;
+      document.getElementById('feat-1-title').textContent = t.feat1Title;
+      document.getElementById('feat-1-body').textContent = t.feat1Body;
+      document.getElementById('feat-2-title').textContent = t.feat2Title;
+      document.getElementById('feat-2-body').textContent = t.feat2Body;
+      document.getElementById('feat-3-title').textContent = t.feat3Title;
+      document.getElementById('feat-3-body').textContent = t.feat3Body;
+      document.getElementById('preview-label').textContent = t.previewLabel;
+      document.getElementById('card-1-state').textContent = t.card1State;
+      document.getElementById('card-1-name').textContent = t.card1Name;
+      document.getElementById('card-1-km').textContent = t.card1Km;
+      document.getElementById('card-2-state').textContent = t.card2State;
+      document.getElementById('card-2-name').textContent = t.card2Name;
+      document.getElementById('card-2-km').textContent = t.card2Km;
+      document.getElementById('card-3-state').textContent = t.card3State;
+      document.getElementById('card-3-name').textContent = t.card3Name;
+      document.getElementById('card-3-km').textContent = t.card3Km;
+      document.getElementById('footer-copy').textContent = t.footerCopy;
+
+      const msgEl = document.getElementById('form-msg');
+      if (msgEl.textContent) {
+        msgEl.textContent = msgEl.classList.contains('success') ? t.successMsg : '';
+      }
+
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+
+      currentLang = lang;
+    }
+
+    async function trackLanguageChoice(lang) {
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/language_choices`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Prefer': 'return=minimal',
+          },
+          body: JSON.stringify({ language: lang }),
+        });
+      } catch {}
+    }
+
+    function setLang(lang) {
+      const isFirstTime = !localStorage.getItem('carvalv_lang');
+      localStorage.setItem('carvalv_lang', lang);
+      applyLang(lang);
+
+      if (isFirstTime) {
+        trackLanguageChoice(lang);
+        document.getElementById('lang-overlay').style.display = 'none';
+      }
+
+      if (!isFirstTime) {
+        document.getElementById('lang-overlay').style.display = 'none';
+      }
+    }
+
+    if (currentLang) {
+      document.getElementById('lang-overlay').style.display = 'none';
+      applyLang(currentLang);
+    }
+
+    const form = document.getElementById('waitlist-form');
+    const emailInput = document.getElementById('email');
+    const submitBtn = document.getElementById('submit-btn');
+    const msg = document.getElementById('form-msg');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = emailInput.value.trim();
+      const lang = currentLang || 'en';
+      const t = copy[lang];
+
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        msg.textContent = t.errorEmail;
+        msg.className = 'form-msg error';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = t.joining;
+      msg.textContent = '';
+      msg.className = 'form-msg';
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Prefer': 'return=minimal',
+          },
+          body: JSON.stringify({ email, language: lang }),
+        });
+
+        if (res.status === 201) {
+          msg.textContent = t.successMsg;
+          msg.className = 'form-msg success';
+          emailInput.value = '';
+          submitBtn.textContent = t.done;
+        } else if (res.status === 409) {
+          msg.textContent = t.errorDupe;
+          msg.className = 'form-msg error';
+          submitBtn.disabled = false;
+          submitBtn.textContent = t.submitBtn;
+        } else {
+          throw new Error();
+        }
+      } catch {
+        msg.textContent = t.errorGeneric;
+        msg.className = 'form-msg error';
+        submitBtn.disabled = false;
+        submitBtn.textContent = t.submitBtn;
+      }
+    });
+  </script>
+</body>
+</html>
