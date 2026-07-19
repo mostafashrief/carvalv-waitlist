@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>carvalv — Know when. Know what. Stay ahead.</title>
-  <meta name="description" content="The car maintenance reminder app built for Egyptian roads. 3 months free, then 39 EGP/month." />
+  <meta name="description" content="The car maintenance reminder app built for Egyptian roads. Early birds get 40% off their first year." />
   <meta property="og:title" content="carvalv — One step ahead." />
   <meta property="og:description" content="Know when. Know what. Stay ahead. Early birds get 40% off their first year." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg' fill='none'%3E%3Crect width='100' height='100' rx='18' fill='%231A1410'/%3E%3Cpath d='M 78,64 A 30,30 0 1 0 78,36' stroke='%23FF7A1A' stroke-width='9' stroke-linecap='round'/%3E%3Cpath d='M 22,50 L 33,50 L 40,62 L 50,36 L 60,62 L 67,50 L 78,50' stroke='%23FF7A1A' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600&family=Space+Grotesk:wght@400;500&family=Space+Mono&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -25,7 +26,7 @@
       --teal: #2EC4B6;
     }
     html { scroll-behavior: smooth; }
-    body { background: var(--black); color: var(--white); font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 16px; line-height: 1.6; min-height: 100vh; }
+    body { background: var(--black); color: var(--white); font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 16px; line-height: 1.6; min-height: 100vh; overflow-x: hidden; }
     html[lang="ar"] body { font-family: 'Cairo', system-ui, sans-serif; }
 
     /* LANGUAGE MODAL */
@@ -64,25 +65,25 @@
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
     h1 { font-family: 'Chakra Petch', sans-serif; font-size: clamp(44px, 8vw, 68px); line-height: 1.05; font-weight: 600; margin-bottom: 16px; color: var(--white); }
-    html[lang="ar"] h1 { font-family: 'Cairo', sans-serif; font-size: clamp(38px, 7vw, 60px); line-height: 1.2; }
+    html[lang="ar"] h1 { font-family: 'Cairo', sans-serif; font-size: clamp(36px, 7vw, 58px); line-height: 1.25; }
     h1 span { color: var(--orange); }
     .hero-sub { font-size: 17px; color: var(--muted); line-height: 1.65; margin-bottom: 16px; max-width: 480px; margin-left: auto; margin-right: auto; }
 
     /* EARLY BIRD BANNER */
-    .early-bird { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,122,26,0.1); border: 1px solid rgba(255,122,26,0.25); border-radius: 10px; padding: 10px 18px; margin-bottom: 28px; }
-    .early-bird-tag { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; background: var(--orange); color: var(--black); padding: 3px 8px; border-radius: 4px; font-weight: 700; flex-shrink: 0; }
+    .early-bird { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,122,26,0.1); border: 1px solid rgba(255,122,26,0.25); border-radius: 10px; padding: 10px 18px; margin-bottom: 28px; max-width: 100%; }
+    .early-bird-tag { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; background: var(--orange); color: var(--black); padding: 3px 8px; border-radius: 4px; font-weight: 700; flex-shrink: 0; white-space: nowrap; }
     html[lang="ar"] .early-bird-tag { font-family: 'Cairo', sans-serif; letter-spacing: 0; font-size: 11px; }
     .early-bird-text { font-size: 13px; color: var(--white); font-weight: 500; }
     html[lang="ar"] .early-bird-text { font-family: 'Cairo', sans-serif; font-size: 14px; }
 
     /* FORM */
-    .form-wrap { max-width: 480px; margin: 0 auto 14px; }
+    .form-wrap { max-width: 480px; margin: 0 auto 14px; width: 100%; }
     .form-fields { background: var(--card); border: 1px solid var(--gray); border-radius: 10px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
     .field-label { font-family: 'Space Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 5px; }
     html[lang="ar"] .field-label { font-family: 'Cairo', sans-serif; letter-spacing: 0; font-size: 11px; text-transform: none; }
     .form-row { display: flex; gap: 10px; }
-    .phone-prefix { background: var(--black); border: 1px solid var(--gray); border-radius: 8px; padding: 12px 14px; font-family: 'Space Mono', monospace; font-size: 14px; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
-    input[type="email"], input[type="tel"], input[type="text"] { flex: 1; width: 100%; background: var(--black); border: 1px solid var(--gray); border-radius: 8px; padding: 12px 16px; font-size: 15px; color: var(--white); font-family: 'Space Grotesk', sans-serif; outline: none; transition: border-color 0.2s; direction: ltr; }
+    .phone-prefix { background: var(--black); border: 1px solid var(--gray); border-radius: 8px; padding: 12px 14px; font-family: 'Space Mono', monospace; font-size: 14px; color: var(--muted); white-space: nowrap; flex-shrink: 0; display: flex; align-items: center; }
+    input[type="email"], input[type="tel"], input[type="text"] { flex: 1; width: 100%; background: var(--black); border: 1px solid var(--gray); border-radius: 8px; padding: 12px 16px; font-size: 15px; color: var(--white); font-family: 'Space Grotesk', sans-serif; outline: none; transition: border-color 0.2s; direction: ltr; min-width: 0; }
     input[type="email"]:focus, input[type="tel"]:focus, input[type="text"]:focus { border-color: var(--orange); }
     input::placeholder { color: var(--dim); }
     select { width: 100%; background: var(--black); border: 1px solid var(--gray); border-radius: 8px; padding: 12px 16px; font-size: 15px; color: var(--white); font-family: 'Space Grotesk', sans-serif; outline: none; transition: border-color 0.2s; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
@@ -126,7 +127,7 @@
     .preview-label { font-family: 'Space Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--dim); margin-bottom: 28px; }
     html[lang="ar"] .preview-label { font-family: 'Cairo', sans-serif; letter-spacing: 0; font-size: 12px; text-transform: none; }
     .cards-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .app-card { background: var(--card); border: 1px solid var(--gray); border-radius: 12px; padding: 18px 20px; width: 180px; text-align: left; }
+    .app-card { background: var(--card); border: 1px solid var(--gray); border-radius: 12px; padding: 18px 20px; width: 180px; text-align: left; flex-shrink: 0; }
     html[dir="rtl"] .app-card { text-align: right; }
     .app-card.overdue { border-color: rgba(255,45,45,0.35); }
     .app-card.due-soon { border-color: rgba(255,122,26,0.35); }
@@ -151,19 +152,35 @@
 
     /* RESPONSIVE */
     @media (max-width: 700px) {
-      nav { padding: 14px 16px; }
-      .nav-center { gap: 10px; }
+      nav { padding: 12px 16px; gap: 10px; }
+      .logo { font-size: 18px; }
+      .logo svg { width: 28px; height: 28px; }
+      .nav-center { gap: 12px; }
       .nav-tag { display: none; }
-      .hero { padding: 52px 20px 48px; }
-      .form-row { flex-direction: column; }
+      .hero { padding: 40px 20px 40px; }
+      .early-bird { flex-direction: column; text-align: center; gap: 6px; }
+      .form-wrap { padding: 0 4px; }
+      .form-row { flex-direction: column; gap: 8px; }
+      .phone-prefix { width: 100%; justify-content: center; }
       .stats { grid-template-columns: 1fr; }
       .stat { border-right: none; border-left: none; border-bottom: 1px solid var(--gray); }
       .stat:last-child { border-bottom: none; }
       .features { grid-template-columns: 1fr; }
       .feat { border-right: none; border-left: none; border-bottom: 1px solid var(--gray); }
       .feat:last-child { border-bottom: none; }
-      .preview { padding: 36px 20px; }
-      footer { padding: 20px 16px; flex-direction: column; align-items: flex-start; }
+      .preview { padding: 36px 16px; }
+      .cards-row { gap: 10px; }
+      .app-card { width: calc(50% - 5px); min-width: 140px; padding: 14px 16px; }
+      footer { padding: 20px 16px; flex-direction: column; align-items: center; text-align: center; }
+      .footer-mid { align-items: center; }
+    }
+
+    @media (max-width: 400px) {
+      nav { padding: 10px 12px; }
+      .logo span { display: none; }
+      .hero { padding: 32px 16px 36px; }
+      h1 { font-size: 38px; }
+      .app-card { width: 100%; }
     }
   </style>
 </head>
@@ -173,9 +190,9 @@
   <div class="lang-overlay" id="lang-overlay" role="dialog" aria-modal="true">
     <div class="lang-modal">
       <div class="lang-modal-logo">
-        <svg viewBox="0 0 50 50" fill="none" aria-hidden="true">
-          <path d="M40 15 A18 18 0 1 0 40 35" stroke="#FF7A1A" stroke-width="5" stroke-linecap="round" fill="none"/>
-          <path d="M10 25 L17 15 L24 25 L31 15 L38 25" stroke="#FF7A1A" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <path d="M 84,68 A 38,38 0 1 0 84,32" stroke="#FF7A1A" stroke-width="10" stroke-linecap="round"/>
+          <path d="M 16,50 L 30,50 L 38,63 L 50,35 L 62,63 L 70,50 L 84,50" stroke="#FF7A1A" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         carvalv
       </div>
@@ -199,11 +216,11 @@
   <!-- NAV -->
   <nav>
     <a href="/" class="logo" aria-label="carvalv home">
-      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
-        <path d="M34 20 A14 14 0 1 1 28.5 7" stroke="#FF7A1A" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-        <path d="M10 20 L14 13 L18 20 L22 13 L26 20" stroke="#FF7A1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <path d="M 84,68 A 38,38 0 1 0 84,32" stroke="#FF7A1A" stroke-width="10" stroke-linecap="round"/>
+        <path d="M 16,50 L 30,50 L 38,63 L 50,35 L 62,63 L 70,50 L 84,50" stroke="#FF7A1A" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      carvalv
+      <span>carvalv</span>
     </a>
     <div class="nav-center">
       <a href="https://www.instagram.com/carvalv.app?igsh=MTZ4em1lMW5xM2lyZw==" class="social-link" target="_blank" rel="noopener" aria-label="Instagram">
@@ -233,7 +250,7 @@
 
       <div class="early-bird" id="early-bird-banner">
         <span class="early-bird-tag" id="early-bird-tag">Early bird</span>
-        <span class="early-bird-text" id="early-bird-text">Join now — get 40% off your first year</span>
+        <span class="early-bird-text" id="early-bird-text">Join now — 40% off your entire first year</span>
       </div>
 
       <div class="form-wrap">
@@ -264,22 +281,26 @@
                   <option>Suzuki</option>
                   <option>MG</option>
                   <option>Lada</option>
+                  <option>Skoda</option>
+                  <option>Peugeot</option>
+                  <option>Renault</option>
+                  <option>Fiat</option>
                 </optgroup>
                 <optgroup label="European">
                   <option>BMW</option>
                   <option>Mercedes-Benz</option>
                   <option>Volkswagen</option>
                   <option>Audi</option>
-                  <option>Skoda</option>
                   <option>Opel</option>
-                  <option>Peugeot</option>
-                  <option>Renault</option>
                   <option>Citroën</option>
-                  <option>Fiat</option>
                   <option>Alfa Romeo</option>
                   <option>Volvo</option>
                   <option>SEAT</option>
                   <option>Dacia</option>
+                  <option>Porsche</option>
+                  <option>Land Rover</option>
+                  <option>Jaguar</option>
+                  <option>Mini</option>
                 </optgroup>
                 <optgroup label="Asian">
                   <option>Honda</option>
@@ -300,6 +321,10 @@
                   <option>Brilliance</option>
                   <option>Changan</option>
                   <option>GAC</option>
+                  <option>Jetour</option>
+                  <option>OMODA</option>
+                  <option>Exeed</option>
+                  <option>Tank</option>
                 </optgroup>
                 <optgroup label="American">
                   <option>Ford</option>
@@ -307,6 +332,11 @@
                   <option>Dodge</option>
                   <option>Cadillac</option>
                   <option>RAM</option>
+                  <option>GMC</option>
+                </optgroup>
+                <optgroup label="Iranian">
+                  <option>Saipa</option>
+                  <option>Iran Khodro</option>
                 </optgroup>
                 <option value="Other">Other (type below)</option>
               </select>
@@ -317,12 +347,12 @@
         </form>
         <p class="form-msg" id="form-msg" role="alert" aria-live="polite"></p>
       </div>
-      <p class="form-hint" id="form-hint">3 months free · then 39 EGP/month · No spam, ever</p>
+      <p class="form-hint" id="form-hint">Early birds: 40% off first year · Regular: 40% off first 3 months · then 39 EGP/month</p>
     </section>
 
     <div class="stats">
       <div class="stat"><div class="stat-num">11M+</div><div class="stat-label" id="stat-1">Licensed vehicles in Egypt</div></div>
-      <div class="stat"><div class="stat-num">39 EGP</div><div class="stat-label" id="stat-2">Per month · 3 months free</div></div>
+      <div class="stat"><div class="stat-num">39 EGP</div><div class="stat-label" id="stat-2">Per month · Early birds pay less</div></div>
       <div class="stat"><div class="stat-num">#1</div><div class="stat-label" id="stat-3">Arabic-first maintenance app</div></div>
     </div>
 
@@ -386,13 +416,13 @@
         h1: 'One step<br><span>ahead.</span>',
         sub: 'The car maintenance reminder app built for Egyptian roads. Know when. Know what. Never get caught off-guard.',
         earlyBirdTag: 'Early bird',
-        earlyBirdText: 'Join now — get 40% off your first year',
+        earlyBirdText: 'Join now — 40% off your entire first year',
         labelEmail: 'Email', labelPhone: 'Phone number', labelBrand: 'Car brand',
         brandPlaceholder: 'Select your car brand',
         otherBrandPlaceholder: 'Type your car brand',
         submitBtn: 'Join waitlist — 40% off',
-        hint: '3 months free · then 39 EGP/month · No spam, ever',
-        stat1: 'Licensed vehicles in Egypt', stat2: 'Per month · 3 months free', stat3: 'Arabic-first maintenance app',
+        hint: 'Early birds: 40% off first year · Regular: 40% off first 3 months · then 39 EGP/month',
+        stat1: 'Licensed vehicles in Egypt', stat2: 'Per month · Early birds pay less', stat3: 'Arabic-first maintenance app',
         feat1Title: 'Know when', feat1Body: 'Smart alerts fire the exact moment a service is due — by mileage and by time. No guesswork.',
         feat2Title: 'Know what', feat2Body: "Straight from the manufacturer's schedule — the right part, the right interval, every time.",
         feat3Title: 'Stay ahead', feat3Body: "Catch every service before it becomes a breakdown — and protect your car's resale value.",
@@ -413,27 +443,27 @@
       },
       ar: {
         navTag: 'قريبًا · مصر',
-        badge: 'وصول مبكر · انضم للقائمة',
-        h1: 'خطوة<br><span>للأمام دايمًا.</span>',
-        sub: 'تطبيق تذكير صيانة السيارات المصمم للطرق المصرية. اعرف امتى. اعرف إيه. متتفاجئش أبدًا.',
-        earlyBirdTag: 'المشتركون الأوائل',
-        earlyBirdText: 'انضم دلوقتي — خصم ٤٠٪ على أول سنة',
+        badge: '🔥 وصول مبكر حصري · سجّل دلوقتي',
+        h1: 'خلّي عربيتك<br><span>دايمًا تمام.</span>',
+        sub: 'زهقت من المفاجآت اللي بتكلفك فلوس؟ carvalv بيتابع صيانة عربيتك عنك ويفكرك بالظبط امتى وإيه اللي محتاج تعمله.',
+        earlyBirdTag: '🔥 عرض الأوائل',
+        earlyBirdText: 'احجز مكانك دلوقتي — خصم ٤٠٪ على السنة الأولى كاملة',
         labelEmail: 'الإيميل', labelPhone: 'رقم الموبايل', labelBrand: 'ماركة العربية',
         brandPlaceholder: 'اختار ماركة عربيتك',
         otherBrandPlaceholder: 'اكتب ماركة عربيتك',
-        submitBtn: 'انضم للقائمة — خصم ٤٠٪',
-        hint: '٣ شهور مجانًا · وبعدين ٣٩ جنيه شهريًا · مش هنبعتلك سبام',
-        stat1: 'سيارة مرخصة في مصر', stat2: 'شهريًا · ٣ شهور مجانًا', stat3: 'أول تطبيق صيانة بالعربي',
-        feat1Title: 'اعرف امتى', feat1Body: 'إشعارات ذكية بالظبط لما يحين موعد الصيانة — بالكيلومتر وبالتاريخ. من غير أي تخمين.',
-        feat2Title: 'اعرف إيه', feat2Body: 'مباشرة من جدول الشركة المصنعة — القطعة الصح، الميعاد الصح، كل مرة.',
-        feat3Title: 'كون دايمًا قدام', feat3Body: 'الق كل صيانة قبل ما تبقى عطل — وحافظ على قيمة عربيتك.',
+        submitBtn: 'احجز مكانك — خصم ٤٠٪',
+        hint: 'الأوائل: خصم ٤٠٪ على السنة الأولى · العادي: خصم ٤٠٪ على أول ٣ شهور · وبعدين ٣٩ جنيه بس',
+        stat1: 'عربية مرخصة في مصر', stat2: 'بس في الشهر · الأوائل بيدفعوا أقل', stat3: 'أول تطبيق صيانة بالعربي المصري',
+        feat1Title: 'عارف امتى', feat1Body: 'إشعار يوصلك بالظبط لما حانت الصيانة — بالكيلو وبالتاريخ. خلصنا من التخمين.',
+        feat2Title: 'عارف إيه', feat2Body: 'المعلومة جايالك مباشرة من الشركة المصنعة — القطعة الصح، في الوقت الصح، كل مرة.',
+        feat3Title: 'دايمًا قدام', feat3Body: 'الق أي صيانة قبل ما تبقى عطل حقيقي — وحافظ على قيمة عربيتك في السوق.',
         previewLabel: 'معاينة التطبيق',
         card1State: 'متأخر', card1Name: 'سير التوقيت', card1Km: 'متأخر ١٢٠٠ كم · اعملها دلوقتي',
         card2State: 'قريبًا', card2Name: 'فلتر الهواء', card2Km: 'بعد ٤٠٠ كم',
         card3State: 'تمام', card3Name: 'تغيير الزيت', card3Km: 'باقي ٢٤٠٠ كم',
         footerCopy: '© ٢٠٢٦ · مصنوع للطرق المصرية · carvalv.com',
         footerRudci: 'طُوِّر بواسطة Rudci',
-        successMsg: 'انضممت للقائمة — خصم الـ٤٠٪ محجوز لك.',
+        successMsg: 'تمام! انضممت للقائمة — خصم الـ٤٠٪ محجوز عليك.',
         errorDupe: 'إنت بالفعل في القائمة.',
         errorGeneric: 'في مشكلة. حاول تاني.',
         errorEmail: 'اكتب إيميل صحيح.',
