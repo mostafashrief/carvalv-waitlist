@@ -427,7 +427,7 @@
         card3State: 'Good', card3Name: 'Your spark plugs', card3Km: "Good for 2,400 km more · You're covered",
         footerCopy: '© 2026 · Built for Egyptian roads · carvalv.com',
         footerRudci: 'Developed by Rudci',
-        successMsg: "You're on the list — 40% off your first year reserved.",
+        successMsg: "You're on the list ✓ — your 40% off for the first year is reserved.<br>We'll send you a confirmation the moment the app goes live.",
         errorDupe: "You're already on the list.",
         errorGeneric: 'Something went wrong. Try again.',
         errorEmail: 'Enter a valid email address.',
@@ -458,7 +458,7 @@
         card3State: 'تمام', card3Name: 'شمعات الإشعال بتاعتك', card3Km: 'باقي ٢٤٠٠ كم · إنت آمن',
         footerCopy: '© ٢٠٢٦ · مصنوع للطرق المصرية · carvalv.com',
         footerRudci: 'طُوِّر بواسطة Rudci',
-        successMsg: 'تمام! انضممت للقائمة — ٤٠٪ خصم محجوز عليك.',
+        successMsg: 'انضممت للقائمة ✓ — خصم ٤٠٪ على السنة الأولى محجوز عليك.<br>هنبعتلك تأكيد على طول ما التطبيق يطلع.',
         errorDupe: 'إنت بالفعل في القائمة.',
         errorGeneric: 'في مشكلة. حاول تاني.',
         errorEmail: 'اكتب إيميل صحيح.',
@@ -579,7 +579,7 @@
           body: JSON.stringify({ email, phone: '+20' + phone, car_brand: brand, language: lang }),
         });
         if (res.status === 201) {
-          msg.textContent = t.successMsg; msg.className = 'form-msg success';
+          msg.innerHTML = t.successMsg; msg.className = 'form-msg success';
           document.getElementById('email').value = '';
           document.getElementById('phone').value = '';
           document.getElementById('car-brand').value = '';
