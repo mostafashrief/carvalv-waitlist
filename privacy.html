@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>carvalv Privacy Policy</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap">
+
+  <style>
+    :root {
+      --bg:        #1A1410;
+      --surface:   #231E19;
+      --border:    #2E2621;
+      --text:      #F4EFE6;
+      --muted:     #8B7D6B;
+      --orange:    #FF8A3D;
+      --orange-dim:#FF8A3D22;
+      --steel:     #5C5048;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) {
+        --bg:        #F4EFE6;
+        --surface:   #FFFFFF;
+        --border:    #DDD5C8;
+        --text:      #1A1410;
+        --muted:     #7A6B5A;
+        --orange:    #D96B1A;
+        --orange-dim:#D96B1A18;
+        --steel:     #9A8B7A;
+      }
+    }
+
+    :root[data-theme="light"] {
+      --bg:        #F4EFE6;
+      --surface:   #FFFFFF;
+      --border:    #DDD5C8;
+      --text:      #1A1410;
+      --muted:     #7A6B5A;
+      --orange:    #D96B1A;
+      --orange-dim:#D96B1A18;
+      --steel:     #9A8B7A;
+    }
+
+    :root[data-theme="dark"] {
+      --bg:        #1A1410;
+      --surface:   #231E19;
+      --border:    #2E2621;
+      --text:      #F4EFE6;
+      --muted:     #8B7D6B;
+      --orange:    #FF8A3D;
+      --orange-dim:#FF8A3D22;
+      --steel:     #5C5048;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      padding: 48px 24px 96px;
+    }
+
+    .doc {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .doc-header {
+      margin-bottom: 56px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .wordmark {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 28px;
+      display: block;
+      text-decoration: none;
+    }
+
+    .doc-title {
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.15;
+      text-wrap: balance;
+      margin-bottom: 16px;
+    }
+
+    .doc-meta {
+      font-size: 13px;
+      color: var(--muted);
+      font-family: 'Courier New', monospace;
+      letter-spacing: 0.02em;
+    }
+
+    .intro {
+      background: var(--orange-dim);
+      border-left: 3px solid var(--orange);
+      border-radius: 0 6px 6px 0;
+      padding: 18px 20px;
+      margin-bottom: 48px;
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    .section {
+      margin-bottom: 44px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .section-rail {
+      width: 3px;
+      height: 22px;
+      background: var(--orange);
+      border-radius: 2px;
+      flex-shrink: 0;
+      align-self: center;
+    }
+
+    h2 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text);
+      text-wrap: balance;
+    }
+
+    p {
+      color: var(--muted);
+      margin-bottom: 14px;
+      font-size: 15px;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 14px;
+    }
+
+    ul li {
+      color: var(--muted);
+      padding-left: 18px;
+      position: relative;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+
+    ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--steel);
+    }
+
+    strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      background: var(--orange-dim);
+      border-radius: 4px;
+      padding: 2px 7px;
+      margin-bottom: 10px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 48px 0;
+    }
+
+    .contact-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-top: 16px;
+    }
+
+    .contact-block p {
+      margin-bottom: 8px;
+    }
+
+    .contact-email {
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      color: var(--orange);
+    }
+
+    .doc-footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--steel);
+      font-family: 'Courier New', monospace;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    a { color: var(--orange); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    @media (max-width: 480px) {
+      body { padding: 32px 18px 64px; }
+      .doc-footer { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="doc">
+
+  <div class="doc-header">
+    <a href="/" class="wordmark">carvalv</a>
+    <h1 class="doc-title">Privacy Policy</h1>
+    <p class="doc-meta">Effective date: 22 August 2025 &nbsp;·&nbsp; Version 1.0</p>
+  </div>
+
+  <div class="intro">
+    carvalv is a car maintenance tracker. We collect only what we need to remind you when your car is due for service. We do not sell your data, show you ads, or share your information with third parties except to operate the app.
+  </div>
+
+  <div class="section">
+    <div class="section-header"><div class="section-rail"></div><h2>Who we are</h2></div>
+    <p>carvalv is operated as an independent application. For questions about this policy, contact us at the address listed at the bottom of this page. This policy applies to the carvalv iOS and Android apps.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><div class="section-rail"></div><h2>What we collect</h2></div>
+    <div class="tag">Account</div>
+    <ul>
+      <li><strong>Email address</strong> — used to identify your account and send password reset links.</li>
+      <li><strong>Phone number</strong> (optional) — used for OTP login if you choose this method.</li>
+    </ul>
+    <div class="tag">Car data</div>
+    <ul>
+      <li><strong>Car details</strong> — brand, model, year, transmission, and timing system type.</li>
+      <li><strong>Mileage readings</strong> — current odometer value and history of readings you log.</li>
+      <li><strong>Service history</strong> — dates, mileage, cost, and notes for services you record.</li>
+    </ul>
+    <div class="tag">Uploaded files</div>
+    <ul>
+      <li><strong>Receipt images</strong> — photos you upload to log a service. Stored in our cloud storage.</li>
+      <li><strong>Odometer photos</strong> — photos you take so our AI can read the kilometer value. Processed and discarded; not permanently stored.</li>
+    </ul>
+    <div class="tag">Usage</div>
+    <ul>
+      <li>We do not use analytics SDKs, ad tracking, or fingerprinting. We do not collect crash reports automatically — errors are surfaced to you in the app.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><div class="section-rail"></div><h2>How we use your data</h2></div>
+    <ul>
+      <li>To calculate when each maintenance item is next due, based on your mileage and service history.</li>
+      <li>To send push notifications reminding you of upcoming services (only if you grant permission).</li>
+      <li>To extract a mileage reading from an odometer photo using AI (the photo is not stored after processing).</li>
+      <li>To parse service receipt images using AI to pre-fill service log fields.</li>
+      <li>To manage your subscription and restore purchases.</li>
+    </ul>
+    <p>We do not use your data to train AI models, build advertising profiles, or share it with data brokers.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><div class="section-rail"></div><h2>Third-party services</h2></div>
+    <p>We use the following third-party services to operate the app:</p>
+    <ul>
+      <li><strong>Supabase</strong> — database and file storage. Your car data and uploaded files are stored on Supabase infrastructure hosted in EU/US regions.</li>
+      <li><strong>Anthropic Claude</strong> — AI model used to read odometer photos and parse receipts. Images are sent to Anthropic's API for processing. Anthropic's <a href="https://www.anthropic.com/privacy" target="_blank">privacy policy</a> applies to this data.</li>
+      <li><strong>RevenueCat</strong> — subscription management. RevenueCat receives your App Store or Play Store purchase information to verify your subscription status. Their <a href="https://www.revenuecat.com/privacy" target="_blank">privacy policy</a> applies.</li>
+      <li><strong>Apple / Google</strong> — push notification delivery. Device tokens are used solely to route notifications to your device.</li>
+    </ul>
+    <p>No other third parties receive your personal data.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><div class="section-rail"></div><h2>Data retention</h2></div>
+    <p>Your data is retained for as long as your account is active. When you delete your account, all of your data — car records, mileage logs, service history, and uploaded files — is permanently deleted within 30 days. Odometer photos are not retained after the mileage value is extracted.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><div class="section-rail"></div><h2>Your rights</h2></div>
+    <p>You can:</p>
+    <ul>
+      <li><strong>Delete your account</strong> — from the Profile tab in the app. This permanently deletes all your data.</li>
+      <li><strong>Export your data</strong> — contact us and we will provide a copy of your data within 30 days.</li>
+      <li><strong>Correct your data</strong> — edit car details and service records directly in the app at any time.</li>
+      <li><strong>Withdraw notification consent</strong> — disable push notifications in your device settings at any time.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><div class="section-rail"></div><h2>Children</h2></div>
+    <p>carvalv is not directed at children under 13. We do not knowingly collect personal data from anyone under 13. If you believe a child has provided us with their information, contact us and we will delete it.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><div class="section-rail"></div><h2>Changes to this policy</h2></div>
+    <p>If we make material changes, we will update the effective date at the top of this page and notify you via email or an in-app notice before the changes take effect.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <div class="section-header"><div class="section-rail"></div><h2>Contact</h2></div>
+    <p>Questions about this policy or requests to access or delete your data:</p>
+    <div class="contact-block">
+      <p><strong>carvalv</strong></p>
+      <p>Cairo, Egypt</p>
+      <p class="contact-email">privacy@carvalv.com</p>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <span>carvalv · Privacy Policy · v1.0</span>
+    <span>Effective 22 August 2025</span>
+  </div>
+
+</div>
+</body>
+</html>
